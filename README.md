@@ -6,7 +6,9 @@
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
 <p align="center">
-  <img src="docs/logo.png" alt="Paranoid Qrypto Logo" width="128">
+  <a href="https://paranoidqrypto.com/" target="_blank" rel="noopener noreferrer">
+    <img src="docs/logo.png" alt="Paranoid Qrypto Logo" width="128">
+  </a>
 </p>
 
 A 100% client-side, single-file HTML tool for securely auditing code and verifying file integrity. This tool provides side-by-side code comparison and a comprehensive file hash calculator/verifier (MD5, SHA-256, SHA-512).
@@ -18,34 +20,36 @@ A 100% client-side, single-file HTML tool for securely auditing code and verifyi
 This tool was built with a "paranoid" mindset, prioritizing security and transparency above all else.
 
 *   **100% Client-Side:** All operations happen directly in your web browser. No files, code, or data are ever sent to any server. Your data remains on your machine, always.
-*   **Works Completely Offline:** The tool is a single HTML file with no external dependencies. You can download it and run it on a completely air-gapped computer for maximum security.
+*   **Works Completely Offline:** The tool is designed to be fully functional without an internet connection. You can download it and run it on a completely air-gapped computer for maximum security.
 *   **Fully Auditable:** The entire source code is contained within a single, human-readable file. There are no hidden packages or compiled code. What you see is what you get.
 
-## Cross-Platform Compatibility
+## Understanding the Project Structure
 
-As a self-contained HTML application, the Integrity Auditor Tool runs on any modern device with a standards-compliant web browser.
+This repository contains two primary HTML files to serve different use cases:
 
-*   **Desktop:** Windows, macOS (Intel), macOS (Apple Silicon), Linux
-*   **Mobile:** Android OS, iOS / iPadOS
-*   **Other devices:** E.g. Chromebook, Raspberry Pi, etc.
-*   **Supported Browsers:** Works on all modern browsers, including Chrome, Firefox, Safari, Edge, and Brave.
+1.  **`index.html` (for GitHub Pages & Online Use)**
+    *   This file is a **completely self-contained application**. All necessary JavaScript (like the `md5.js` library) is embedded directly within the file.
+    *   **Purpose:** This ensures that the tool can be hosted on GitHub Pages and run as a true single-file application. It's the file you use when accessing the tool via the web URL.
 
-### Requirements
+2.  **`integrity-auditor-tool.html` (for Local Use & Development)**
+    *   This file is structured for easier development. It links to external JavaScript files located in the `/js/` directory (e.g., `<script src="js/md5.js"></script>`).
+    *   **Purpose:** This is the recommended file to use when you have downloaded the entire repository to your local machine. It keeps the code cleaner and easier to manage.
 
-*   **JavaScript must be enabled** in your browser for the tool to function.
-*   The tool must be served over **HTTPS or from `localhost`** for the Web Crypto API (SHA-256/512) to be available.
+## How to Use
 
-### Offline Capabilities
+There are two ways to use the Integrity Auditor Tool:
 
-The `integrity-auditor-tool.html` file is designed to be fully portable and functional without an internet connection.
+### 1. Online (Recommended for Quick Access)
 
-**All functions are available OFFLINE:**
-*   ✅ **Code Comparison** (Strict, Normalized, and Whitespace-Removed)
-*   ✅ **File Hash Calculation** (MD5, SHA-256, SHA-512)
-*   ✅ **File Hash Verification** (against provided checksums)
-*   ✅ **Save Results** to a local text file
+Simply visit the live version hosted on GitHub Pages. No download is required.
 
----
+**[https://paranoid-qrypto.github.io/integrity-auditor-tool/](https://paranoid-qrypto.github.io/integrity-auditor-tool/)**
+
+### 2. Offline (Recommended for Maximum Security)
+
+1.  Download the repository to your local machine (either via `git clone` or by downloading the ZIP file).
+2.  Disconnect from the internet (optional, for a true air-gapped environment).
+3.  Open the **`integrity-auditor-tool.html`** file in your web browser.
 
 ## Key Features
 
@@ -67,28 +71,9 @@ The `integrity-auditor-tool.html` file is designed to be fully portable and func
 
 ---
 
-## How to Use
-
-### To Compare Code or Text
-1.  Open the `integrity-auditor-tool.html` file and select the **"Code Comparison"** tab.
-2.  Paste your content into the "Input 1" and "Input 2" boxes, or use the "Upload File" buttons.
-3.  Click **"Compare Content"**.
-4.  Analyze the results in the "Comparison Analysis" section that appears.
-
-### To Verify File Hashes
-1.  Select the **"File Hash Verifier"** tab.
-2.  Click **"Select File(s)"** to choose the file(s) you want to analyze.
-3.  **To Calculate:** Simply click **"Calculate Hashes"**.
-4.  **To Verify:**
-    *   Provide the expected hash(es) in the "Verify File Integrity" section on the right.
-    *   Click **"Verify Selected Files"**.
-5.  Review the results, which will show a clear "Match" or "Mismatch" status for each hash.
-
----
-
 ## Dependencies & Verification
 
-This tool is designed to be a secure, self-contained HTML file. The following libraries are used.
+This tool relies on two primary JavaScript sources for its functionality.
 
 ### 1. Web Crypto API (Native Browser API)
 *   **Purpose:** Used for all secure hash calculations (**SHA-256, SHA-512**).
@@ -97,10 +82,11 @@ This tool is designed to be a secure, self-contained HTML file. The following li
 
 ### 2. js-md5
 *   **Version:** `0.7.3`
-*   **Purpose:** A lightweight library for calculating **MD5** hashes, included for compatibility with older checksums. The code is embedded directly in the HTML file.
+*   **Purpose:** A lightweight library for calculating **MD5** hashes, included for compatibility with older checksums.
 *   **Source of Truth (NPM):** [https://www.npmjs.com/package/js-md5/v/0.7.3](https://www.npmjs.com/package/js-md5/v/0.7.3)
 *   **Direct Download Link:** [https://cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.js](https://cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.js)
-*   **SHA-256 Hash of Embedded Script:** `c690299cd533422a8773ed03a83a6c92404d950e460481dbbc512ba451bbb857`
+*   **SHA-256 Hash of `js/md5.js`:** `c690299cd533422a8773ed03a83a6c92404d950e460481dbbc512ba451bbb857`
+*   **Note:** The code in `js/md5.js` and the code embedded in `index.html` should both match this hash.
 
 ---
 
